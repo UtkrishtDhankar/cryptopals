@@ -56,8 +56,7 @@ std::string chunk_3_to_base64(std::array<uint8_t, 3> bytes)
 {
     static std::string char_set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-    uint32_t bytes_in_one = 0;
-    memcpy(&bytes_in_one , bytes.data(), 3);
+    uint32_t bytes_in_one = (uint32_t) bytes[0] << 16 | (uint32_t) bytes[1] << 8 | (uint32_t) bytes[2];
 
     std::string base64;
     base64.resize(4);
@@ -74,8 +73,7 @@ std::string chunk_2_to_base64(std::array<uint8_t, 2> bytes)
 {
     static std::string char_set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-    uint32_t bytes_in_one = 0;
-    memcpy(&bytes_in_one , bytes.data(), 2);
+    uint32_t bytes_in_one = (uint32_t) bytes[0] << 16 | (uint32_t) bytes[1] << 8 | 0x00;
 
     std::string base64;
     base64.resize(4);
@@ -107,7 +105,7 @@ std::string bytes_to_base64(std::vector<uint8_t> bytes)
 {
     std::string base64;
 
-    int size_to_reserve = (bytes.size() * 4) / 3 + 3 - (bytes.size() * 4) % 3;
+    int size_to_reserve = (bytes.size() * 4) / 3 + 4 - (bytes.size() * 4) % 3;
     base64.reserve(size_to_reserve);
 
     auto it = bytes.begin();
