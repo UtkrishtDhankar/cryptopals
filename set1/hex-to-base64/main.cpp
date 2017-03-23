@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <array>
 #include <cstring>
+#include <stdexcept>
 
 // Converts the pair h1, h2 (where h1 is the most significant hex) to a uint8_t
 std::uint8_t hex_pair_to_uint8(char h1, char h2)
@@ -14,12 +15,16 @@ std::uint8_t hex_pair_to_uint8(char h1, char h2)
         result += (h1 - '0') * 16;
     } else if (h1 >= 'a' && h1 <= 'f') {
         result += (10 + h1 - 'a') * 16;
+    } else {
+        throw std::domain_error("Input h1 is not a valid input to hex_pair_to_uint8.");
     }
 
     if (h2 >= '0' && h2 <= '9') {
         result += h2 - '0';
     } else if (h2 >= 'a' && h2 <= 'f') {
         result += 10 + h2 - 'a';
+    } else {
+        throw std::domain_error("Input h2 is not a valid input to hex_pair_to_uint8.");
     }
 
     return result;
