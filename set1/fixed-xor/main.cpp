@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <stdexcept>
 
+// XORs two byte arrays of the same length
 std::vector<uint8_t> fixed_xor(const std::vector<uint8_t>& a, const std::vector<uint8_t>& b)
 {
     if (a.size() != b.size()) {
