@@ -7,7 +7,7 @@
 #include <stdexcept>
 
 // Converts the pair h1, h2 (where h1 is the most significant hex) to a uint8_t
-std::uint8_t hex_pair_to_uint8(char h1, char h2)
+std::uint8_t hex_pair_to_uint8(const char& h1, const char& h2)
 {
     uint8_t result = 0;
 
@@ -30,7 +30,7 @@ std::uint8_t hex_pair_to_uint8(char h1, char h2)
     return result;
 }
 
-std::vector<uint8_t> hex_to_bytes(std::string hex)
+std::vector<uint8_t> hex_to_bytes(const std::string& hex)
 {
     std::vector<uint8_t> bytes;
 
@@ -57,7 +57,7 @@ std::vector<uint8_t> hex_to_bytes(std::string hex)
 }
 
 // Converts a 3 character array to 4 base64 characters.
-std::string chunk_3_to_base64(std::array<uint8_t, 3> bytes)
+std::string chunk_3_to_base64(const std::array<uint8_t, 3>& bytes)
 {
     static std::string char_set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -74,7 +74,7 @@ std::string chunk_3_to_base64(std::array<uint8_t, 3> bytes)
 }
 
 // Converts a 2 character array to 4 base64 characters.
-std::string chunk_2_to_base64(std::array<uint8_t, 2> bytes)
+std::string chunk_2_to_base64(const std::array<uint8_t, 2>& bytes)
 {
     static std::string char_set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -91,7 +91,7 @@ std::string chunk_2_to_base64(std::array<uint8_t, 2> bytes)
 }
 
 // Converts a byte to 4 base64 characters.
-std::string chunk_1_to_base64(uint8_t bytes)
+std::string chunk_1_to_base64(const uint8_t& bytes)
 {
     static std::string char_set = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
@@ -106,7 +106,7 @@ std::string chunk_1_to_base64(uint8_t bytes)
     return base64;
 }
 
-std::string bytes_to_base64(std::vector<uint8_t> bytes)
+std::string bytes_to_base64(const std::vector<uint8_t>& bytes)
 {
     std::string base64;
 
