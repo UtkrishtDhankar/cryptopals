@@ -221,3 +221,34 @@ char find_single_xor_key(const std::vector<uint8_t>& bytes, float& score)
     score = min_score;
     return best_key;
 }
+
+std::pair<char, char> byte_to_hex_pair(uint8_t bytes)
+{
+	static const std::string hexChars = "0123456789ABCDEF";
+
+	uint8_t firstFourBits = (bytes & 0xF0) >> 4;
+	uint8_t lastFourBits = bytes & 0x0F;
+
+	char first = hexChars[firstFourBits];
+	char second = hexChars[lastFourBits];
+
+	return std::make_pair(first, second);
+}
+
+std::string bytes_to_hex(std::vector<uint8_t> bytes)
+{
+	// reserve the space for the string
+	std::string hex(bytes.size() * 2, 0);
+
+	auto bytes_it = bytes.begin();
+	auto hex_it = hex.begin();
+	for(;
+			bytes_it < bytes.end() && hex_it < hex.end();
+			bytes_it++, hex_it += 2) {
+		auto hex_pair = byte_to_hex_pair(*bytes_it);
+		hex_it[0] = hex_pair.first;
+		hex_it[1] = hex_pair.second;
+	}
+
+	return hex;
+}
